@@ -10,54 +10,54 @@ import java.io.InputStream;
 
 public class Mazo {
 	
-	InputStream is;
-	ArrayList<Carta> cartasList;
+	private InputStream is;
+	private JsonReader reader;
+	private JsonArray cartas;
+	private File jsonInputFile;
+	private ArrayList<Carta> cartasList;
 	
-	public Mazo() {
+	public Mazo(String mazoPath) {
 		cartasList = new ArrayList<>();
+		this.importarCartas(mazoPath);
 	}
 	
-	public void importarCartas(File jsonFile) {
+	public void importarCartas(String mazoPath) {
+		
+		jsonInputFile = new File(mazoPath);
 		
 		try {
-			is = new FileInputStream(jsonFile);
+			is = new FileInputStream(jsonInputFile);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		JsonReader reader = Json.createReader(is);
-		JsonArray cartas = (JsonArray) reader.readObject().getJsonArray("cartas");
+		reader = Json.createReader(is);
+		cartas = (JsonArray) reader.readObject().getJsonArray("cartas");
 			
 		 for (JsonObject carta : cartas.getValuesAs(JsonObject.class)) {
 			 
-			 Carta carta1 = new Carta();	
+			 Carta cartaNueva = new Carta();	
              String nombreCarta = carta.getString("nombre");
-             carta1.setNombre(nombreCarta);
+             cartaNueva.setNombre(nombreCarta);
              
              JsonObject atributos = (JsonObject) carta.getJsonObject("atributos");
              
-
              for (String nombreAtributo:atributos.keySet()) {
                 
-            	 carta1.addAtributo(nombreAtributo, atributos.getInt(nombreAtributo));
+            	 cartaNueva.addAtributo(nombreAtributo, atributos.getInt(nombreAtributo));
              }
            
-             //verificar si la carta cumple los requisitos
-            
-             
-            	 
+             //verificar si la carta cumple los requisitos	 
         	 if (cartasList.size() != 0) {
             	 
-            	 if ( carta1.perteneceAlMazo(cartasList.get(0))  ) {
+            	 if (cartaNueva.perteneceAlMazo(cartasList.get(0))) {
             		           
-            		 agregarCarta(carta1);
+            		 agregarCarta(cartaNueva);
             	 }
             	 
              }else {
             	 
-            	 agregarCarta(carta1);
-            	 
+            	 agregarCarta(cartaNueva);    	 
              }         
 		 }
 		 reader.close();
@@ -84,24 +84,22 @@ public class Mazo {
 		this.cartasList = cartasMezcladas;	
 	}
 	
+	public ArrayList<Carta> getCartas(){
+		
+		return this.cartasList;		
+	}
+	
 	public static void main(String[] args) {
 		
-		String mazoPath = "./superheroes.json";
-		File jsonInputFile = new File(mazoPath);
+		String mazoPath = "./superheroes.json";	
+		Mazo mazo1 = new Mazo(mazoPath);
 		
-		Mazo mazo1 = new Mazo();
-		Jugador jugador1 = new Jugador("Pepe");
-		Jugador jugador2 = new Jugador ("Pepa");
+		Jugador jugador1 = new Jugador("Luis");
+		Jugador jugador2 = new Jugador ("Marcelo");
 		
-		mazo1.importarCartas(jsonInputFile);
-		
-		Juego juego1 = new Juego(mazo1, jugador1, jugador2);
+		Juego juego1 = new Juego(mazo1, jugador1, jugador2, 100);
 		
 		juego1.jugar();
-		
-		
-		
-		
 	}
 
 }

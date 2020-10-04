@@ -1,39 +1,40 @@
 
 public class Atributo {
 
-	   private String nombre;
-	   private int valor;
+	private String nombre;
+	private int valor;
+	   
+	public Atributo(String nombre, int valor) {
+		this.nombre = nombre;
+		this.valor = valor;
+	}
 
-	    public Atributo(String nombre, int valor) {
-	        this.nombre = nombre;
-	        this.valor = valor;
-	    }
+	public int getValor() {
+		return valor;
+	}
 
-		public int getValor() {
-			return valor;
-		}
-
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
-		}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 	    
-		@Override
-		public String toString() {
+	@Override
+	public String toString() {
 			
-			return this.nombre+" - " +this.valor;	
-		}
+		return this.nombre+" - " +this.valor;	
+	}
 		
-		public String getNombre() {
-			return this.nombre;
-		}
+	public String getNombre() {
+		return this.nombre;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
 		
-		public boolean equals(Object obj) {
-			
-		       try {
-		            Atributo otra = (Atributo) obj;
-		            return this.getNombre().equals(otra.getNombre());
-		        } catch (Exception e){
-		            return false;
-		        }
+		try {
+			Atributo otra = (Atributo) obj;
+			return this.getNombre().equals(otra.getNombre());
+		} catch (Exception e){
+			return false;
 		}
+	}
 }

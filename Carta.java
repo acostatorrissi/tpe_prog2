@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Carta {
 
 	private String nombre;
-	ArrayList<Atributo> atributos;
+	private ArrayList<Atributo> atributos;
 	
 	public Carta() {
 	
@@ -16,8 +16,7 @@ public class Carta {
 	
 	public String getNombre() {
 		
-		return this.nombre;
-		
+		return this.nombre;	
 	}
 	
 	public void addAtributo(String nombre, int valor) {
@@ -26,11 +25,16 @@ public class Carta {
 		this.atributos.add(atributo);	
 	}
 	
+	public ArrayList<Atributo> getAtributos(){
+		return this.atributos;
+	}
+	
 	public boolean perteneceAlMazo(Carta carta) {
 		
 			return this.atributos.size() == carta.atributos.size() && this.atributos.containsAll(carta.atributos);	
 	}
 		
+	@Override
 	public String toString() {
 			
 		return this.nombre + " " +this.atributos + "\n";
@@ -38,8 +42,6 @@ public class Carta {
 	
 	public Atributo devolverAtributo(int i) {
 		
-		return atributos.get(i);
-		
+		return atributos.get(i);	
 	}
-	
 }

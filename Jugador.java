@@ -21,7 +21,7 @@ public class Jugador {
 
 	public int elegirRandom(Carta carta) {
 		
-		int random = (int) Math.random()*carta.atributos.size();
+		int random = (int) Math.random()*carta.getAtributos().size();
 		
 		return random;
 	}
