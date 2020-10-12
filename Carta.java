@@ -29,9 +29,24 @@ public class Carta {
 		return this.atributos;
 	}
 	
+	//corregido
 	public boolean perteneceAlMazo(Carta carta) {
 		
-			return this.atributos.size() == carta.atributos.size() && this.atributos.containsAll(carta.atributos);	
+		if(this.atributos.size() == carta.atributos.size()) {
+			
+			for (int i = 0 ; i < this.atributos.size() ; i++) {
+				
+				if (this.atributos.contains(carta.atributos.get(i))) {
+					
+				}else {
+					return false;
+				}
+			}
+			
+		}else {
+			return false;
+		}	
+		return true;
 	}
 		
 	@Override

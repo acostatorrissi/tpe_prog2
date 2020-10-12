@@ -12,6 +12,7 @@ public class Atributo {
 	public int getValor() {
 		return valor;
 	}
+	
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;

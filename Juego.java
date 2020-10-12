@@ -6,6 +6,7 @@ public class Juego {
 	private Jugador jugador2;
 	private Mazo mazo;
 	private int maxRondas;
+	private String print;
 	
 	public Juego(Mazo mazo, Jugador jugador1, Jugador jugador2, int maxRondas) {
 		
@@ -13,25 +14,21 @@ public class Juego {
 		this.jugador2 = jugador2;
 		this.mazo = mazo;	
 		this.maxRondas = maxRondas;
+		this.print = "";
 	}
 	
 	public void repartir() {
 		
 		mazo.mezclarMazo();
 		
-		for (int i = 0 ; i < mazo.getCartas().size() ; i++) {
-			
-			if ( i % 2 == 0  || i == 0 ) {
-				
+		for (int i = 0 ; i < mazo.getCartas().size() ; i++) {		
+			if ( i % 2 == 0  || i == 0 ) {			
 				jugador1.addCartas(mazo.getCartas().get(i));
-				
+				//borrar la carta del mazo
 			}else {
 				jugador2.addCartas(mazo.getCartas().get(i));
 			}		
 		}
-		
-		mazo.getCartas().clear();
-		
 	}
 		
 	public void jugar() {
@@ -46,15 +43,18 @@ public class Juego {
 		repartir();
 		
 		//Se juega mientras no se supere el max de rondas y ambos jugadores tengan cartas en sus mazos
-		while ( (rondaActual <= maxRondas) && ( (jugador1.getCartas().size() != 0) && (jugador2.getCartas().size() != 0)) ) {
+		while ( (rondaActual <= maxRondas) && ( (jugador1.getMazo().getCartas().size() != 0) && (jugador2.getMazo().getCartas().size() != 0)) ) {
 			
-			//Ambos jugadores toman la primer carta de sus respectivos mazos
-			//preguntar si esta bien no haber puesto el mazo del tipo Mazo
-			cartaJ1 = jugador1.getCartas().get(0);
-			cartaJ2 = jugador2.getCartas().get(0);
+			//Ambos jugadores toman la primer carta de sus respectivos mazos y la remueven del mazo
+			//corregido
+			cartaJ1 = jugador1.getMazo().getPrimeraCarta();
+			cartaJ2 = jugador2.getMazo().getPrimeraCarta();
 			
-			System.out.println("------ RONDA " + rondaActual + " --------");
-			System.out.print("El jugador ");
+			print += "------ RONDA \" + rondaActual + \" --------";
+	
+			
+			//System.out.println("------ RONDA " + rondaActual + " --------");
+			//System.out.print("El jugador ");
 			
 			if(turno ==1) {
 		
@@ -64,7 +64,7 @@ public class Juego {
 				
 			}else {
 				
-				random = jugador2.elegirRandom(cartaJ2);
+				random = jugador2.elegirRandom(cartaJ2); //elegir entre cant de atributos del mazo
 				
 				System.out.print(jugador2.getNombre());	
 			}
@@ -80,11 +80,11 @@ public class Juego {
 			System.out.println("La carta de " +jugador2.getNombre()+ " es " + cartaJ2.getNombre() + " con " +atributoJugador2.getNombre() + " - " +atributoJugador2.getValor());
 				
 			//gana el j1
-			if ( atributoJugador1.getValor() > atributoJugador2.getValor()) {
+			if ( atributoJugador1.getValor() > atributoJugador2.getValor()) {//comparar entre cartas pasar atributo
 						
 				//El ganador agrega al mazo su propia carta y la de su rival (se ubican por defecto al final)
 				jugador1.addCartas(cartaJ2);
-				jugador1.addCartas(cartaJ1);
+				jugador1.addCartas(cartaJ1); 
 				
 				System.out.println("Gana la ronda " + jugador1.getNombre());
 				turno = 1;
@@ -107,21 +107,23 @@ public class Juego {
 				jugador2.addCartas(cartaJ2);		
 			}
 				
-			//Pase lo que pase las cartas con las que jugaron se irán del principio del mazo
-			jugador1.getCartas().remove(0);
-			jugador2.getCartas().remove(0);	
-			
 			rondaActual++;
 			
-			System.out.println(jugador1.getNombre() + " posee ahora " + jugador1.getCartas().size() + " cartas y " + jugador2.getNombre() + " posee " + jugador2.getCartas().size());		
+			System.out.println(jugador1.getNombre() + " posee ahora " + jugador1.getMazo().getCartas().size() + " cartas y " + jugador2.getNombre() + " posee " + jugador2.getMazo().getCartas().size());		
 		}
 		
-		if (jugador1.getCartas().size() == 0 || jugador1.getCartas().size() < jugador2.getCartas().size()) {	
-			System.out.println("Ganó " + jugador2.getNombre() );
+		System.out.println("Ganó " + getGanador().getNombre());
+		
+	}
+
+	private Jugador getGanador() {
 			
+		if (jugador1.getMazo().getCartas().size() == 0 || jugador1.getMazo().getCartas().size() < jugador2.getMazo().getCartas().size()) {	
+			return jugador2;
 		}else {
-			System.out.println("Ganó " + jugador1.getNombre());
+			return jugador1;
 		}	
+		
 	}
 		
 }

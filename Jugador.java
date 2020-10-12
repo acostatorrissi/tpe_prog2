@@ -3,20 +3,25 @@ import java.util.ArrayList;
 public class Jugador {
 
 	private String nombre;
-	private ArrayList<Carta> cartas;
+	//corregido
+	private Mazo cartas;
 	
 	public Jugador (String nombre) {
 		this.setNombre(nombre);
-		cartas =  new ArrayList<>();
+		cartas = new Mazo();
 	}
 	
 	public void addCartas(Carta carta) {
 		
-		this.cartas.add(carta);
+		this.cartas.agregarCarta(carta);
 	}
 	
-	public ArrayList<Carta> getCartas(){
+	public Mazo getMazo(){
 		return this.cartas;
+	}
+	
+	public void removePrimeraCarta() {
+		this.cartas.getCartas();
 	}
 
 	public int elegirRandom(Carta carta) {

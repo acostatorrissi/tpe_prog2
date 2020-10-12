@@ -21,6 +21,12 @@ public class Mazo {
 		this.importarCartas(mazoPath);
 	}
 	
+	public Mazo() {
+		
+		cartasList = new ArrayList<>();
+		
+	}
+	
 	public void importarCartas(String mazoPath) {
 		
 		jsonInputFile = new File(mazoPath);
@@ -68,6 +74,14 @@ public class Mazo {
 		this.cartasList.add(carta);	
 	}
 	
+	public Carta getPrimeraCarta() {
+		
+		Carta carta = this.cartasList.get(0);
+		this.cartasList.remove(0);
+		
+		return carta;
+	}
+	
 	public void mezclarMazo() {
 		
 		ArrayList<Carta> cartasMezcladas = new ArrayList<>();		
@@ -77,7 +91,7 @@ public class Mazo {
 		while (0 < cartasList.size()) {
 			
 			random = (int) (Math.random()*cartasList.size());		
-			
+			//Collections.shuffle
 			cartasMezcladas.add(cartasList.get(random));
 			cartasList.remove(random);
 		}
