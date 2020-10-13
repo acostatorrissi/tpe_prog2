@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Random;
 
 public class Jugador {
 
@@ -24,11 +24,20 @@ public class Jugador {
 		this.cartas.getCartas();
 	}
 
-	public int elegirRandom(Carta carta) {
+	public Carta getPrimeraCarta() {
+		return this.getMazo().getPrimeraCarta();
+	}
+	
+ 	public int getCantidadCartas() {
+		return this.cartas.getCartas().size();
+	}
+	
+	public int elegirRandom() {
 		
-		int random = (int) Math.random()*carta.getAtributos().size();
-		
-		return random;
+		//corregido
+		Random random = new Random();	
+		return random.nextInt(this.cartas.getCantidadAtributos()); 
+
 	}
 
 	public String getNombre() {
@@ -37,6 +46,13 @@ public class Jugador {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	@Override
+	public String toString() {
+		
+		return this.getNombre();
+		
 	}
 	
 	

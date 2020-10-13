@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -66,6 +68,7 @@ public class Mazo {
             	 agregarCarta(cartaNueva);    	 
              }         
 		 }
+		 
 		 reader.close();
 	}
 	
@@ -84,18 +87,13 @@ public class Mazo {
 	
 	public void mezclarMazo() {
 		
-		ArrayList<Carta> cartasMezcladas = new ArrayList<>();		
+		Collections.shuffle(this.cartasList);
+	}
+
+	public int getCantidadAtributos() {
 		
-		int random = 0;
+		return this.cartasList.get(0).getAtributos().size();
 		
-		while (0 < cartasList.size()) {
-			
-			random = (int) (Math.random()*cartasList.size());		
-			//Collections.shuffle
-			cartasMezcladas.add(cartasList.get(random));
-			cartasList.remove(random);
-		}
-		this.cartasList = cartasMezcladas;	
 	}
 	
 	public ArrayList<Carta> getCartas(){

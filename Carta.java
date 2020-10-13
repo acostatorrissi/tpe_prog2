@@ -25,6 +25,12 @@ public class Carta {
 		this.atributos.add(atributo);	
 	}
 	
+	public Atributo getAtributo(int index) {
+		
+		return this.atributos.get(index);
+		
+	}
+	
 	public ArrayList<Atributo> getAtributos(){
 		return this.atributos;
 	}

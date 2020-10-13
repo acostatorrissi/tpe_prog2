@@ -6,7 +6,6 @@ public class Juego {
 	private Jugador jugador2;
 	private Mazo mazo;
 	private int maxRondas;
-	private String print;
 	
 	public Juego(Mazo mazo, Jugador jugador1, Jugador jugador2, int maxRondas) {
 		
@@ -14,7 +13,6 @@ public class Juego {
 		this.jugador2 = jugador2;
 		this.mazo = mazo;	
 		this.maxRondas = maxRondas;
-		this.print = "";
 	}
 	
 	public void repartir() {
@@ -24,15 +22,28 @@ public class Juego {
 		for (int i = 0 ; i < mazo.getCartas().size() ; i++) {		
 			if ( i % 2 == 0  || i == 0 ) {			
 				jugador1.addCartas(mazo.getCartas().get(i));
-				//borrar la carta del mazo
 			}else {
 				jugador2.addCartas(mazo.getCartas().get(i));
 			}		
 		}
 	}
+	
+	private Jugador getGanador() {
 		
-	public void jugar() {
+		if (jugador1.getMazo().getCartas().size() == 0 || jugador1.getMazo().getCartas().size() < jugador2.getMazo().getCartas().size()) {	
+			return jugador2;
 			
+		}else if (jugador1.getMazo().getCartas().size() == jugador2.getMazo().getCartas().size()){
+			
+			return null;
+		}else {
+			return jugador1;
+		}
+		
+	}
+	
+	public void jugar() {
+		
 		int turno = 1;
 		int random = 0;
 		Carta cartaJ1;
@@ -43,41 +54,36 @@ public class Juego {
 		repartir();
 		
 		//Se juega mientras no se supere el max de rondas y ambos jugadores tengan cartas en sus mazos
-		while ( (rondaActual <= maxRondas) && ( (jugador1.getMazo().getCartas().size() != 0) && (jugador2.getMazo().getCartas().size() != 0)) ) {
+		while ( (rondaActual <= maxRondas) && ( (jugador1.getCantidadCartas() != 0) && (jugador2.getCantidadCartas() != 0)) ) {
 			
 			//Ambos jugadores toman la primer carta de sus respectivos mazos y la remueven del mazo
 			//corregido
-			cartaJ1 = jugador1.getMazo().getPrimeraCarta();
-			cartaJ2 = jugador2.getMazo().getPrimeraCarta();
+			cartaJ1 = jugador1.getPrimeraCarta();
+			cartaJ2 = jugador2.getPrimeraCarta();
 			
-			print += "------ RONDA \" + rondaActual + \" --------";
-	
-			
-			//System.out.println("------ RONDA " + rondaActual + " --------");
-			//System.out.print("El jugador ");
+			System.out.println("------ RONDA " + rondaActual + " --------");
+			System.out.print("El jugador ");
 			
 			if(turno ==1) {
 		
-				random = jugador1.elegirRandom(cartaJ1);
-				
-				System.out.print(jugador1.getNombre());
+				random = jugador1.elegirRandom();	
+				System.out.print(jugador1);
 				
 			}else {
 				
-				random = jugador2.elegirRandom(cartaJ2); //elegir entre cant de atributos del mazo
-				
-				System.out.print(jugador2.getNombre());	
+				random = jugador2.elegirRandom(); //corregido
+				System.out.print(jugador2);	
 			}
 			
 			System.out.print(" selecciona competir por el atributo ");
 			
-			atributoJugador1 = cartaJ1.getAtributos().get(random);
-			atributoJugador2 = cartaJ2.getAtributos().get(random);
+			atributoJugador1 = cartaJ1.getAtributo(random);
+			atributoJugador2 = cartaJ2.getAtributo(random);
 			
 			System.out.println(atributoJugador2.getNombre());
 		
-			System.out.println("La carta de " +jugador1.getNombre()+ " es " + cartaJ1.getNombre() + " con " +atributoJugador1.getNombre() + " - " +atributoJugador1.getValor());
-			System.out.println("La carta de " +jugador2.getNombre()+ " es " + cartaJ2.getNombre() + " con " +atributoJugador2.getNombre() + " - " +atributoJugador2.getValor());
+			System.out.println("La carta de " +jugador1+ " es " + cartaJ1.getNombre() + " con " +atributoJugador1);
+			System.out.println("La carta de " +jugador2+ " es " + cartaJ2.getNombre() + " con " +atributoJugador2);
 				
 			//gana el j1
 			if ( atributoJugador1.getValor() > atributoJugador2.getValor()) {//comparar entre cartas pasar atributo
@@ -86,7 +92,7 @@ public class Juego {
 				jugador1.addCartas(cartaJ2);
 				jugador1.addCartas(cartaJ1); 
 				
-				System.out.println("Gana la ronda " + jugador1.getNombre());
+				System.out.println("Gana la ronda " + jugador1);
 				turno = 1;
 				
 			//gana j2		
@@ -95,35 +101,24 @@ public class Juego {
 				jugador2.addCartas(cartaJ2);
 				jugador2.addCartas(cartaJ1);
 				
-				System.out.println("Gana la ronda " + jugador2.getNombre());
+				System.out.println("Gana la ronda " + jugador2);
 				turno = 2;
 				
 			//empate
 			}else {
+					
+				jugador1.addCartas(cartaJ1);
+				jugador2.addCartas(cartaJ2);
 				
 				System.out.println("Hubo un empate");
-				
-				jugador1.addCartas(cartaJ1);
-				jugador2.addCartas(cartaJ2);		
-			}
-				
+			}	
 			rondaActual++;
 			
-			System.out.println(jugador1.getNombre() + " posee ahora " + jugador1.getMazo().getCartas().size() + " cartas y " + jugador2.getNombre() + " posee " + jugador2.getMazo().getCartas().size());		
+			System.out.println(jugador1 + " posee ahora " + jugador1.getCantidadCartas() + " cartas y " + jugador2 + " posee " + jugador2.getCantidadCartas());		
 		}
-		
-		System.out.println("Ganó " + getGanador().getNombre());
-		
+		System.out.println("Ganó " + getGanador());	
 	}
 
-	private Jugador getGanador() {
-			
-		if (jugador1.getMazo().getCartas().size() == 0 || jugador1.getMazo().getCartas().size() < jugador2.getMazo().getCartas().size()) {	
-			return jugador2;
-		}else {
-			return jugador1;
-		}	
-		
-	}
+	
 		
 }
