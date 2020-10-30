@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 
-public class PocimaFortalecedora extends Pocima{
+public class PocimaPorcentaje extends Pocima{
 
 	private double incremento;
 	private String atributo;
 	
-	public PocimaFortalecedora(String nombre, double incremento) {
+	public PocimaPorcentaje(String nombre, double incremento) {
 		super(nombre);
 		this.incremento = incremento;
 		this.atributo = null;
 	}
 	
-	public PocimaFortalecedora(String nombre, String atributo, double incremento) {
+	public PocimaPorcentaje(String nombre, String atributo, double incremento) {
 		
 		super(nombre);
 		this.atributo = atributo;

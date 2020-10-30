@@ -53,11 +53,11 @@ public class Carta {
 	//corregido
 	public boolean perteneceAlMazo(Carta carta) {
 		
-		if(this.atributos.size() == carta.atributos.size()) {
+		if(this.atributos.size() == carta.getAtributos().size()) {
 			
 			for (int i = 0 ; i < this.atributos.size() ; i++) {
 				
-				if (this.atributos.contains(carta.atributos.get(i))) {
+				if (this.atributos.contains(carta.getAtributos().get(i))) {
 					
 				}else {
 					return false;

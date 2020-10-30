@@ -115,33 +115,33 @@ public class Mazo {
 		EstrategiaObstinado obstinado = new EstrategiaObstinado();
 		EstrategiaTimbero timbero = new EstrategiaTimbero();
 
-		PocimaFortalecedora pocimaF1 = new PocimaFortalecedora("Pócima fortalecedora", 0.2);
-		PocimaFortalecedora pocimaF2 = new PocimaFortalecedora("Pócima fortalecedora", 0.3);
+		PocimaPorcentaje pocimaF1 = new PocimaPorcentaje("Pócima fortalecedora", 0.2);
+		PocimaPorcentaje pocimaF2 = new PocimaPorcentaje("Pócima fortalecedora", 0.3);
 		
-		PocimaFortalecedora pocimaFPlus1 = new PocimaFortalecedora("Pócima fortalecedora Plus", 0.5);
-		PocimaFortalecedora pocimaFPlus2 = new PocimaFortalecedora("Pócima fortalecedora Plus", 0.6);
+		PocimaPorcentaje pocimaFPlus1 = new PocimaPorcentaje("Pócima fortalecedora Plus", 0.5);
+		PocimaPorcentaje pocimaFPlus2 = new PocimaPorcentaje("Pócima fortalecedora Plus", 0.6);
 		
-		PocimaReductora pocimaR1 = new PocimaReductora("Kriptonita", 0.25);
-		PocimaReductora pocimaR2 = new PocimaReductora("Kriptonita", 0.30);
+		PocimaPorcentaje pocimaR1 = new PocimaPorcentaje("Kriptonita", -0.25);
+		PocimaPorcentaje pocimaR2 = new PocimaPorcentaje("Kriptonita", -0.30);
 		
-		PocimaReductora pocimaR3 = new PocimaReductora("Reductor de plomo", 0.55);
-		PocimaReductora pocimaR4 = new PocimaReductora("Reductor de plomo", 0.60);
+		PocimaPorcentaje pocimaR3 = new PocimaPorcentaje("Reductor de plomo", -0.55);
+		PocimaPorcentaje pocimaR4 = new PocimaPorcentaje("Reductor de plomo", -0.60);
 		
 		PocimaValorFijo pocimaV1 = new PocimaValorFijo("Quiero vale 4", 4);
 		PocimaValorFijo pocimaV2 = new PocimaValorFijo("Número mágico", 25);
 		
-		PocimaFortalecedora pocimaIF1 = new PocimaFortalecedora("Pócima selectiva fuerza", "fuerza", 0.35);
-		PocimaFortalecedora pocimaIF2 = new PocimaFortalecedora("Pócima selectiva fuerza", "fuerza", 0.35);
+		PocimaPorcentaje pocimaIF1 = new PocimaPorcentaje("Pócima selectiva fuerza", "fuerza", 0.35);
+		PocimaPorcentaje pocimaIF2 = new PocimaPorcentaje("Pócima selectiva fuerza", "fuerza", 0.35);
 		
-		PocimaFortalecedora pocimaIP1 = new PocimaFortalecedora("Pócima selectiva peso", "peso", 0.43);
-		PocimaFortalecedora pocimaIP2 = new PocimaFortalecedora("Pócima selectiva peso", "peso", 0.43);
+		PocimaPorcentaje pocimaIP1 = new PocimaPorcentaje("Pócima selectiva peso", "peso", 0.43);
+		PocimaPorcentaje pocimaIP2 = new PocimaPorcentaje("Pócima selectiva peso", "peso", 0.43);
 		
 		PocimaValorFijo pocimaPC = new PocimaValorFijo("Pócima valor fijo", 15);
-		PocimaReductora pocimaRC = new PocimaReductora("Pócima reductora", 0.15);
-		PocimaFortalecedora pocimaFC = new PocimaFortalecedora("Pócima fortalecedora", 0.2);
+		PocimaPorcentaje pocimaRC = new PocimaPorcentaje("Pócima reductora", -0.15);
+		PocimaPorcentaje pocimaFC = new PocimaPorcentaje("Pócima fortalecedora", 0.2);
 		
 		PocimaValorFijo pocimaPC2 = new PocimaValorFijo("Pócima valor fijo", 10);
-		PocimaFortalecedora pocimaPI2 = new PocimaFortalecedora("Pócima selectiva velocidad", "velocidad", 0.5);
+		PocimaPorcentaje pocimaPI2 = new PocimaPorcentaje("Pócima selectiva velocidad", "velocidad", 0.5);
 			
 		PocimaCocktail pocimaC1 = new PocimaCocktail("Pócima Cocktail");
 		pocimaC1.agregarPocima(pocimaPC);

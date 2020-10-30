@@ -7,8 +7,9 @@ public class EstrategiaAmbicioso implements Estrategia {
 	public int elegirAtributo(Carta carta) {
 		
 		ArrayList<Atributo> aux = new ArrayList<>(carta.getAtributos());
-		Collections.sort(aux);	
-		return carta.getAtributos().indexOf(aux.get(4));
+		Collections.sort(aux);
+		Collections.reverse(aux);
+		return carta.getAtributos().indexOf(aux.get(0));
 		
 	}
 	

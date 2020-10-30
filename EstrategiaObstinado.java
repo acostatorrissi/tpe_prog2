@@ -13,7 +13,7 @@ public class EstrategiaObstinado implements Estrategia{
 	@Override
 	public int elegirAtributo(Carta carta) {
 		
-		if(this.flag== false) {
+		if(this.flag == false) {
 			Random random = new Random();	
 			this.elegido = random.nextInt(carta.getAtributos().size()); 
 			this.flag = true;

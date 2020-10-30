@@ -4,7 +4,7 @@ public abstract class Pocima {
 
 	protected String nombre;
 	
-	public Pocima(String nombre) {
+	protected Pocima(String nombre) {
 		this.nombre = nombre;
 	}
 	
