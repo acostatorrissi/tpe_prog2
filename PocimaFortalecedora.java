@@ -16,7 +16,6 @@ public class PocimaFortalecedora extends Pocima{
 		super(nombre);
 		this.atributo = atributo;
 		this.incremento = incremento;
-		
 	}
 	
 	public void aplicar(ArrayList<Atributo> atributos) {
@@ -29,12 +28,5 @@ public class PocimaFortalecedora extends Pocima{
 				atributo.setValor(atributo.getValor() + (atributo.getValor() * incremento));
 			}	
 		}
-		
 	}
-
-	
-	
-	
-	
-	
 }

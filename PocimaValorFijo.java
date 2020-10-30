@@ -7,7 +7,6 @@ public class PocimaValorFijo extends Pocima{
 	public PocimaValorFijo(String nombre, int valorFijo) {
 		super(nombre);
 		this.valorFijo = valorFijo;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -15,9 +14,6 @@ public class PocimaValorFijo extends Pocima{
 		
 		for(Atributo atributo : atributos) {
 			atributo.setValor(valorFijo);
-		}
-		
-		
+		}	
 	}
-
 }

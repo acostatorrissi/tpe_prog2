@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class Jugador {
 
 	private String nombre;
@@ -57,7 +55,5 @@ public class Jugador {
 		return this.getNombre();
 		
 	}
-	
-	
-	
+
 }

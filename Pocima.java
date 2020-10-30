@@ -11,11 +11,7 @@ public abstract class Pocima {
 	public String toString() {
 		
 		return this.nombre;
-		
 	}
 	
 	public abstract void aplicar(ArrayList<Atributo> atributos);
-	
-
-	
 }

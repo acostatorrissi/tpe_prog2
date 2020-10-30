@@ -99,7 +99,6 @@ public class Mazo {
 	public int getCantidadAtributos() {
 
 		return this.cartasList.get(0).getAtributos().size();
-
 	}
 
 	public ArrayList<Carta> getCartas() {
@@ -152,7 +151,6 @@ public class Mazo {
 		PocimaCocktail pocimaC2 = new PocimaCocktail("Pócima Cocktail");
 		pocimaC2.agregarPocima(pocimaPC2);
 		pocimaC2.agregarPocima(pocimaPI2);
-		
 		
 		Jugador jugador1 = new Jugador("Luis", obstinado);
 		Jugador jugador2 = new Jugador("Marcelo", timbero);
