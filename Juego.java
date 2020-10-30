@@ -52,8 +52,6 @@ public class Juego {
 		
 		mazo.mezclarMazo();
 		
-		
-		
 		for (int i = 0 ; i < mazo.getCartas().size() ; i++) {		
 			if ( i % 2 == 0  || i == 0 ) {			
 				jugador1.addCartas(mazo.getCartas().get(i));

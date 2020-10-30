@@ -43,7 +43,6 @@ public class Atributo implements Comparable<Atributo> {
 		}
 	}
 
-	
 	@Override
 	public int compareTo(Atributo a) {
 		
