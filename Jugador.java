@@ -4,11 +4,17 @@ public class Jugador {
 
 	private String nombre;
 	//corregido
-	private Mazo cartas;
+	protected Mazo cartas;
+	private Estrategia estrategia;
 	
-	public Jugador (String nombre) {
+	public Jugador (String nombre, Estrategia estrategia) {
 		this.setNombre(nombre);
+		this.estrategia = estrategia;
 		cartas = new Mazo();
+	}
+	
+	public void setEstrategia(Estrategia estrategia) {
+		this.estrategia = estrategia;
 	}
 	
 	public void addCartas(Carta carta) {
@@ -32,14 +38,11 @@ public class Jugador {
 		return this.cartas.getCartas().size();
 	}
 	
-	public int elegirRandom() {
-		
-		//corregido
-		Random random = new Random();	
-		return random.nextInt(this.cartas.getCantidadAtributos()); 
-
-	}
-
+ 	public int elegirAtributo(Carta carta) {
+ 	
+ 		return this.estrategia.elegirAtributo(carta);
+ 	}
+ 	
 	public String getNombre() {
 		return nombre;
 	}

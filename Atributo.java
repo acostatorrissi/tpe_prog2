@@ -1,5 +1,5 @@
 
-public class Atributo {
+public class Atributo implements Comparable<Atributo> {
 
 	private String nombre;
 	private int valor;
@@ -10,10 +10,14 @@ public class Atributo {
 	}
 
 	public int getValor() {
+		
 		return valor;
 	}
 	
-
+	public void setValor(double d) {
+		 this.valor = (int) d;
+	}
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -37,5 +41,19 @@ public class Atributo {
 		} catch (Exception e){
 			return false;
 		}
+	}
+
+	
+	@Override
+	public int compareTo(Atributo a) {
+		
+		if(this.getValor()>a.getValor()) {
+			return 1;
+		}else if(this.getValor()<a.getValor()) {
+			return -1;
+		}else {
+			return 0;
+		}
+		
 	}
 }

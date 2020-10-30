@@ -4,10 +4,25 @@ public class Carta {
 
 	private String nombre;
 	private ArrayList<Atributo> atributos;
+	private Pocima pocima;
 	
 	public Carta() {
-	
+		this.pocima = null;
 		atributos = new ArrayList<>();		
+	}
+	
+	public Pocima getPocima() {
+		return this.pocima;
+	}
+	
+	public void aplicarPocima() {
+		
+		this.pocima.aplicar(this.atributos);
+		
+	}
+	
+	public void setPocima(Pocima pocima) {
+		this.pocima = pocima;
 	}
 	
 	public void setNombre(String nombre) {
@@ -32,7 +47,7 @@ public class Carta {
 	}
 	
 	public ArrayList<Atributo> getAtributos(){
-		return this.atributos;
+		return new ArrayList<Atributo>(this.atributos);
 	}
 	
 	//corregido
@@ -58,7 +73,7 @@ public class Carta {
 	@Override
 	public String toString() {
 			
-		return this.nombre + " " +this.atributos + "\n";
+		return this.nombre;
 	}
 	
 	public Atributo devolverAtributo(int i) {
