@@ -89,13 +89,13 @@ public class Juego {
 				"\nLa carta de " + jugador1 + " es " + cartaJ1 + " con " + valorAux1;
 		 
 		if(pocimaJ1 != null) {
-			imprimir = imprimir + ". Se aplicó " + pocimaJ1 + " - valor resultante: " + atributoJugador1.getValor(); 
+			imprimir = imprimir + ". Se aplicó " + pocimaJ1 + "! -> Nuevo Valor: " + atributoJugador1.getValor(); 
 		}
 		
 		imprimir = imprimir + "\nLa carta de " + jugador2 + " es " + cartaJ2 + " con " + valorAux2;
 		
 		if(pocimaJ2 != null) {
-			imprimir = imprimir + ". Se aplicó " + pocimaJ2 + " - valor resultante: " + atributoJugador2.getValor();  
+			imprimir = imprimir + ". Se aplicó " + pocimaJ2 + "! -> Nuevo Valor: " + atributoJugador2.getValor();  
 		}
 		
 		imprimir = imprimir + "\nRonda finalizada. Ganador: " + ganadorRonda + ".\n" + jugador1 + " tiene ahora " + jugador1.getCantidadCartas() + " cartas y " +
