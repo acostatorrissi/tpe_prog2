@@ -80,7 +80,6 @@ public class Mazo {
 	public void setPocima(Pocima pocima, int indice) {
 
 		this.cartasList.get(indice).setPocima(pocima);
-
 	}
 
 	public Carta getPrimeraCarta() {
@@ -152,8 +151,8 @@ public class Mazo {
 		pocimaC2.agregarPocima(pocimaPC2);
 		pocimaC2.agregarPocima(pocimaPI2);
 		
-		Jugador jugador1 = new Jugador("Luis", obstinado);
-		Jugador jugador2 = new Jugador("Marcelo", timbero);
+		Jugador jugador1 = new Jugador("Luis", timbero);
+		Jugador jugador2 = new Jugador("Marcelo", ambicioso);
 
 		Juego juego1 = new Juego(mazo1, jugador1, jugador2, 100);
 		
