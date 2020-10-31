@@ -26,7 +26,6 @@ public class Mazo {
 	public Mazo() {
 
 		cartasList = new ArrayList<>();
-
 	}
 
 	public void importarCartas(String mazoPath) {
@@ -113,7 +112,8 @@ public class Mazo {
 		EstrategiaAmbicioso ambicioso = new EstrategiaAmbicioso();
 		EstrategiaObstinado obstinado = new EstrategiaObstinado();
 		EstrategiaTimbero timbero = new EstrategiaTimbero();
-
+		EstrategiaSonso sonso = new EstrategiaSonso();
+		
 		PocimaPorcentaje pocimaF1 = new PocimaPorcentaje("Pócima Fortalecedora", 0.2);
 		PocimaPorcentaje pocimaF2 = new PocimaPorcentaje("Pócima Fortalecedora", 0.3);
 		

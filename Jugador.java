@@ -1,7 +1,6 @@
 public class Jugador {
 
 	private String nombre;
-	//corregido
 	protected Mazo cartas;
 	private Estrategia estrategia;
 	
@@ -52,8 +51,6 @@ public class Jugador {
 	@Override
 	public String toString() {
 		
-		return this.getNombre();
-		
+		return this.getNombre();	
 	}
-
 }

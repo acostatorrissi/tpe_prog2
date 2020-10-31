@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class PocimaCocktail extends Pocima {
 
-	ArrayList<Pocima> pocimas;
+	private ArrayList<Pocima> pocimas;
 	
 	public PocimaCocktail(String nombre) {
 		super(nombre);
