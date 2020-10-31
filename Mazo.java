@@ -141,7 +141,14 @@ public class Mazo {
 		
 		PocimaValorFijo pocimaPC2 = new PocimaValorFijo("Pócima Valor Fijo", 10);
 		PocimaPorcentaje pocimaPI2 = new PocimaPorcentaje("Pócima Selectiva Velocidad", "velocidad", 0.5);
-			
+		
+		PocimaCocktail pocimaC3 = new PocimaCocktail("Pócima cocktail");
+		PocimaValorFijo pocimaVF1 = new PocimaValorFijo("Pócima valor fijo", 14);
+		PocimaPorcentaje pocimaSV = new PocimaPorcentaje("Pócima Selectiva Velocidad", 0.4);
+		
+		pocimaC3.agregarPocima(pocimaSV);
+		pocimaC3.agregarPocima(pocimaVF1);
+		
 		PocimaCocktail pocimaC1 = new PocimaCocktail("Pócima Cocktail");
 		pocimaC1.agregarPocima(pocimaPC);
 		pocimaC1.agregarPocima(pocimaRC);
@@ -150,6 +157,7 @@ public class Mazo {
 		PocimaCocktail pocimaC2 = new PocimaCocktail("Pócima Cocktail");
 		pocimaC2.agregarPocima(pocimaPC2);
 		pocimaC2.agregarPocima(pocimaPI2);
+		pocimaC2.agregarPocima(pocimaC3);
 		
 		Jugador jugador1 = new Jugador("Luis", timbero);
 		Jugador jugador2 = new Jugador("Marcelo", ambicioso);
