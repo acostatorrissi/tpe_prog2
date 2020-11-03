@@ -34,11 +34,14 @@ public class Carta {
 		this.atributos.add(atributo);	
 	}
 	
-	public Atributo getCopiaAtributo(int index) {
+	public Atributo getCopiaAtributo(String nombreAtributo) {
 		
-		Atributo atr = this.atributos.get(index);
-		
-		return new Atributo(atr.getNombre(), atr.getValor());
+		for (Atributo atributo : this.atributos) {
+			if(atributo.getNombre().equals(nombreAtributo)) {
+				return new Atributo(atributo.getNombre(), atributo.getValor());
+			}
+		}
+		return null;
 	}
 	
 	public ArrayList<Atributo> getAtributos(){

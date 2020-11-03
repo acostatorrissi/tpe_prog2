@@ -35,7 +35,7 @@ public class Jugador {
 		return this.cartas.getCartas().size();
 	}
 	
- 	public int elegirAtributo(Carta carta) {
+ 	public String elegirAtributo(Carta carta) {
  	
  		return this.estrategia.elegirAtributo(carta);
  	}

@@ -4,7 +4,8 @@ import java.util.Random;
 public class Juego {
 	
 	private int rondaActual;
-	private int indice;
+	//private int indice;
+	private String nombreAtributo;
 	private int turno;
 	private Jugador jugador1;
 	private Jugador jugador2;
@@ -29,7 +30,7 @@ public class Juego {
 		this.jugador2 = jugador2;
 		this.rondaActual = 1;
 		this.turno = 1;
-		this.indice = 0;
+		this.nombreAtributo = "";
 		this.jugadorTurno = null;
 		this.ganadorRonda = " empate! ";
 		this.valorAux1 = 0;
@@ -85,17 +86,17 @@ public class Juego {
 
 	public void imprimirRonda() {
 		
-		String imprimir = "---------Ronda " + rondaActual + "----------\n"+"El jugador " + jugadorTurno + " selecciona competir por el atributo "+ atributoJugador1.getNombre() + 
+		String imprimir = "---------Ronda " + rondaActual + "----------\n"+"El jugador " + jugadorTurno + " selecciona competir por el atributo "+ nombreAtributo + 
 				"\nLa carta de " + jugador1 + " es " + cartaJ1 + " con " + valorAux1;
 		 
 		if(pocimaJ1 != null) {
-			imprimir = imprimir + ". Se aplicó " + pocimaJ1 + "! -> Nuevo Valor: " + pocimaJ1.aplicar(cartaJ1.getCopiaAtributo(indice)); 
+			imprimir = imprimir + ". Se aplicó " + pocimaJ1 + "! -> Nuevo Valor: " + pocimaJ1.aplicar(cartaJ1.getCopiaAtributo(nombreAtributo)); 
 		}
 		
 		imprimir = imprimir + "\nLa carta de " + jugador2 + " es " + cartaJ2 + " con " + valorAux2;
 		
 		if(pocimaJ2 != null) {
-			imprimir = imprimir + ". Se aplicó " + pocimaJ2 + "! -> Nuevo Valor: " + pocimaJ2.aplicar(cartaJ2.getCopiaAtributo(indice));  
+			imprimir = imprimir + ". Se aplicó " + pocimaJ2 + "! -> Nuevo Valor: " + pocimaJ2.aplicar(cartaJ2.getCopiaAtributo(nombreAtributo));  
 		}
 		
 		imprimir = imprimir + "\nRonda finalizada. Ganador: " + ganadorRonda + ".\n" + jugador1 + " tiene ahora " + jugador1.getCantidadCartas() + " cartas y " +
@@ -104,10 +105,10 @@ public class Juego {
 		System.out.println(imprimir);
 	}
 	
-	public Carta getCartaGanadora(Carta c1, Carta c2, int indice) {
+	public Carta getCartaGanadora(Carta c1, Carta c2, String nombreAtributo) {
 		
-		Atributo atrJ1 = c1.getCopiaAtributo(indice);
-		Atributo atrJ2 = c2.getCopiaAtributo(indice);
+		Atributo atrJ1 = c1.getCopiaAtributo(nombreAtributo);
+		Atributo atrJ2 = c2.getCopiaAtributo(nombreAtributo);
 		
 		if(c1.getPocima() != null) {
 			atrJ1 = c1.getPocima().aplicar(atrJ1);
@@ -151,13 +152,13 @@ public class Juego {
 				jugadorTurno = jugador2;
 			}
 			
-			indice = jugadorTurno.elegirAtributo(cartaJ1);
+			nombreAtributo = jugadorTurno.elegirAtributo(cartaJ1);
 		
-			atributoJugador1 = cartaJ1.getCopiaAtributo(indice);
-			atributoJugador2 = cartaJ2.getCopiaAtributo(indice);
+			atributoJugador1 = cartaJ1.getCopiaAtributo(nombreAtributo);
+			atributoJugador2 = cartaJ2.getCopiaAtributo(nombreAtributo);
 
-			valorAux1 = cartaJ1.getCopiaAtributo(indice).getValor();
-			valorAux2 = cartaJ2.getCopiaAtributo(indice).getValor();
+			valorAux1 = cartaJ1.getCopiaAtributo(nombreAtributo).getValor();
+			valorAux2 = cartaJ2.getCopiaAtributo(nombreAtributo).getValor();
 			
 			
 			if(cartaJ1.getPocima() != null) {	
@@ -167,7 +168,7 @@ public class Juego {
 				pocimaJ2 = cartaJ2.getPocima();
 			}
 			
-			cartaGanadora = getCartaGanadora(cartaJ1, cartaJ2, indice);
+			cartaGanadora = getCartaGanadora(cartaJ1, cartaJ2, nombreAtributo);
 		
 			if (cartaGanadora == cartaJ1){
 				
