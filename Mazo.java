@@ -106,7 +106,7 @@ public class Mazo {
 	
 	public static void main(String[] args) {
 
-		String mazoPath = "./superheroes.json";
+		String mazoPath = "./autos.json";
 		Mazo mazo1 = new Mazo(mazoPath);
 
 		EstrategiaAmbicioso ambicioso = new EstrategiaAmbicioso();

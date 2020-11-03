@@ -68,10 +68,10 @@ public class Juego {
 	
 	private Jugador getGanador() {
 		
-		if (jugador1.getMazo().getCartas().size() == 0 || jugador1.getMazo().getCartas().size() < jugador2.getMazo().getCartas().size()) {	
+		if (jugador1.getCantidadCartas() == 0 || jugador1.getCantidadCartas() < jugador2.getCantidadCartas()) {	
 			return jugador2;
 			
-		}else if (jugador1.getMazo().getCartas().size() == jugador2.getMazo().getCartas().size()){
+		}else if (jugador1.getCantidadCartas() == jugador2.getCantidadCartas()){
 			
 			return null;
 		}else {
@@ -89,13 +89,13 @@ public class Juego {
 				"\nLa carta de " + jugador1 + " es " + cartaJ1 + " con " + valorAux1;
 		 
 		if(pocimaJ1 != null) {
-			imprimir = imprimir + ". Se aplicó " + pocimaJ1 + "! -> Nuevo Valor: " + atributoJugador1.getValor(); 
+			imprimir = imprimir + ". Se aplicó " + pocimaJ1 + "! -> Nuevo Valor: " + pocimaJ1.aplicar(cartaJ1.getCopiaAtributo(indice)); 
 		}
 		
 		imprimir = imprimir + "\nLa carta de " + jugador2 + " es " + cartaJ2 + " con " + valorAux2;
 		
 		if(pocimaJ2 != null) {
-			imprimir = imprimir + ". Se aplicó " + pocimaJ2 + "! -> Nuevo Valor: " + atributoJugador2.getValor();  
+			imprimir = imprimir + ". Se aplicó " + pocimaJ2 + "! -> Nuevo Valor: " + pocimaJ2.aplicar(cartaJ2.getCopiaAtributo(indice));  
 		}
 		
 		imprimir = imprimir + "\nRonda finalizada. Ganador: " + ganadorRonda + ".\n" + jugador1 + " tiene ahora " + jugador1.getCantidadCartas() + " cartas y " +
@@ -106,15 +106,23 @@ public class Juego {
 	
 	public Carta getCartaGanadora(Carta c1, Carta c2, int indice) {
 		
-		if (c1.getAtributos().get(indice).getValor() > c2.getAtributos().get(indice).getValor()) {
+		Atributo atrJ1 = c1.getCopiaAtributo(indice);
+		Atributo atrJ2 = c2.getCopiaAtributo(indice);
+		
+		if(c1.getPocima() != null) {
+			atrJ1 = c1.getPocima().aplicar(atrJ1);
+		}
+		if(c2.getPocima() != null) {
+			atrJ2 = c2.getPocima().aplicar(atrJ2);
+		}
+		
+		if (atrJ1.compareTo(atrJ2) > 0) {
 			return c1;
-		}else if(c1.getAtributos().get(indice).getValor() < c2.getAtributos().get(indice).getValor()) {
+		}else if(atrJ1.compareTo(atrJ2) < 0) {
 			return c2;
 		}else {
 			return null;
-		}
-		
-		
+		}	
 	}
 	
 	public void imprimirGanador() {
@@ -145,20 +153,18 @@ public class Juego {
 			
 			indice = jugadorTurno.elegirAtributo(cartaJ1);
 		
-			atributoJugador1 = cartaJ1.getAtributo(indice);
-			atributoJugador2 = cartaJ2.getAtributo(indice);
+			atributoJugador1 = cartaJ1.getCopiaAtributo(indice);
+			atributoJugador2 = cartaJ2.getCopiaAtributo(indice);
 
-			valorAux1 = cartaJ1.getAtributo(indice).getValor();
-			valorAux2 = cartaJ2.getAtributo(indice).getValor();
+			valorAux1 = cartaJ1.getCopiaAtributo(indice).getValor();
+			valorAux2 = cartaJ2.getCopiaAtributo(indice).getValor();
+			
 			
 			if(cartaJ1.getPocima() != null) {	
 				pocimaJ1 = cartaJ1.getPocima();
-				cartaJ1.aplicarPocima();
-			}
-					
+			}			
 			if(cartaJ2.getPocima() != null) {
 				pocimaJ2 = cartaJ2.getPocima();
-				cartaJ2.aplicarPocima();
 			}
 			
 			cartaGanadora = getCartaGanadora(cartaJ1, cartaJ2, indice);

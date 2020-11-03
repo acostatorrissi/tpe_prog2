@@ -10,10 +10,10 @@ public class PocimaValorFijo extends Pocima{
 	}
 
 	@Override
-	public void aplicar(ArrayList<Atributo> atributos) {
+	public Atributo aplicar(Atributo atr) {
 		
-		for(Atributo atributo : atributos) {
-			atributo.setValor(valorFijo);
-		}	
+		atr.setValor(valorFijo);
+		
+		return atr;
 	}
 }

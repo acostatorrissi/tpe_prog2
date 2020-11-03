@@ -9,16 +9,18 @@ public class PocimaCocktail extends Pocima {
 		this.pocimas = new ArrayList<>();
 	}
 
-	@Override
-	public void aplicar(ArrayList<Atributo> atributos) {
-		
-		for(Pocima pocima : this.pocimas) {
-			pocima.aplicar(atributos);	
-		}
-	}
-	
 	public void agregarPocima(Pocima pocima) {
 		this.pocimas.add(pocima);
+	}
+
+	@Override
+	public Atributo aplicar(Atributo atr) {
+		
+		for(Pocima pocima : this.pocimas) {
+			pocima.aplicar(atr);
+		}
+		
+		return atr;
 	}
 
 	

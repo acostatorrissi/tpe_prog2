@@ -13,5 +13,6 @@ public abstract class Pocima {
 		return this.nombre;
 	}
 	
-	public abstract void aplicar(ArrayList<Atributo> atributos);
+	public abstract Atributo aplicar(Atributo atr);
+	
 }

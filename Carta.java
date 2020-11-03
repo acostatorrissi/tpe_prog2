@@ -15,11 +15,6 @@ public class Carta {
 		return this.pocima;
 	}
 	
-	public void aplicarPocima() {
-		
-		this.pocima.aplicar(this.atributos);
-	}
-	
 	public void setPocima(Pocima pocima) {
 		this.pocima = pocima;
 	}
@@ -39,9 +34,11 @@ public class Carta {
 		this.atributos.add(atributo);	
 	}
 	
-	public Atributo getAtributo(int index) {
+	public Atributo getCopiaAtributo(int index) {
 		
-		return this.atributos.get(index);	
+		Atributo atr = this.atributos.get(index);
+		
+		return new Atributo(atr.getNombre(), atr.getValor());
 	}
 	
 	public ArrayList<Atributo> getAtributos(){
