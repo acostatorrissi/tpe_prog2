@@ -18,11 +18,7 @@ public class PocimaCocktail extends Pocima {
 		
 		for(Pocima pocima : this.pocimas) {
 			pocima.aplicar(atr);
-		}
-		
+		}	
 		return atr;
-	}
-
-	
-	
+	}	
 }

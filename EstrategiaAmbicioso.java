@@ -8,8 +8,7 @@ public class EstrategiaAmbicioso implements Estrategia {
 		
 		ArrayList<Atributo> aux = new ArrayList<>(carta.getAtributos());
 		Collections.sort(aux);
-		Collections.reverse(aux);
 	
-		return aux.get(0).getNombre();
+		return aux.get(aux.size()-1).getNombre();
 	}
 }

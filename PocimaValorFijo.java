@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class PocimaValorFijo extends Pocima{
 
@@ -12,8 +11,7 @@ public class PocimaValorFijo extends Pocima{
 	@Override
 	public Atributo aplicar(Atributo atr) {
 		
-		atr.setValor(valorFijo);
-		
+		atr.setValor(valorFijo);		
 		return atr;
 	}
 }

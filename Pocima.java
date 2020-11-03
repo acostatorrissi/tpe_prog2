@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public abstract class Pocima {
 
 	protected String nombre;
@@ -8,6 +6,7 @@ public abstract class Pocima {
 		this.nombre = nombre;
 	}
 	
+	@Override
 	public String toString() {
 		
 		return this.nombre;

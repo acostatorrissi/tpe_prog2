@@ -48,7 +48,6 @@ public class Carta {
 		return new ArrayList<Atributo>(this.atributos);
 	}
 	
-	//corregido
 	public boolean perteneceAlMazo(Carta carta) {
 		
 		if(this.atributos.size() == carta.getAtributos().size()) {
@@ -73,8 +72,4 @@ public class Carta {
 		return this.nombre;
 	}
 	
-	public Atributo devolverAtributo(int i) {
-		
-		return atributos.get(i);	
-	}
 }

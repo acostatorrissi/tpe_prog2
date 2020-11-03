@@ -106,13 +106,16 @@ public class Mazo {
 	
 	public static void main(String[] args) {
 
-		String mazoPath = "./autos.json";
+		String mazoPath = "./autos.json";  //cambiar por path local del mazo
 		Mazo mazo1 = new Mazo(mazoPath);
 
 		EstrategiaAmbicioso ambicioso = new EstrategiaAmbicioso();
-		EstrategiaObstinado obstinado = new EstrategiaObstinado();
+		//EstrategiaObstinado obstinado = new EstrategiaObstinado();    //Se pueden descomentar y utilizar!
 		EstrategiaTimbero timbero = new EstrategiaTimbero();
-		EstrategiaSonso sonso = new EstrategiaSonso();
+		//EstrategiaSonso sonso = new EstrategiaSonso();
+		
+		Jugador jugador1 = new Jugador("Luis", timbero);
+		Jugador jugador2 = new Jugador("Marcelo", ambicioso);
 		
 		PocimaPorcentaje pocimaF1 = new PocimaPorcentaje("Pócima Fortalecedora", 0.2);
 		PocimaPorcentaje pocimaF2 = new PocimaPorcentaje("Pócima Fortalecedora", 0.3);
@@ -159,9 +162,6 @@ public class Mazo {
 		pocimaC2.agregarPocima(pocimaPI2);
 		pocimaC2.agregarPocima(pocimaC3);
 		
-		Jugador jugador1 = new Jugador("Luis", timbero);
-		Jugador jugador2 = new Jugador("Marcelo", ambicioso);
-
 		Juego juego1 = new Juego(mazo1, jugador1, jugador2, 100);
 		
 		juego1.agregarPocima(pocimaF1);

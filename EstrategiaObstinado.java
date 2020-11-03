@@ -21,6 +21,4 @@ public class EstrategiaObstinado implements Estrategia{
 		}	
 		return this.elegido;
 	}
-	
-	
 }
