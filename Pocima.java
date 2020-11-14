@@ -9,9 +9,8 @@ public abstract class Pocima {
 	@Override
 	public String toString() {
 		
-		return this.nombre;
+		return " Se aplicó "+ this.nombre + "! Valor Modificado: ";
 	}
 	
-	public abstract Atributo aplicar(Atributo atr);
-	
+	public abstract double aplicar(String nombreAtr, double valorAtr);
 }

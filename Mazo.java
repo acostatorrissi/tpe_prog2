@@ -17,6 +17,7 @@ public class Mazo {
 	private JsonArray cartas;
 	private File jsonInputFile;
 	private ArrayList<Carta> cartasList;
+	private final int PRIMERAPOS = 0; 
 
 	public Mazo(String mazoPath) {
 		cartasList = new ArrayList<>();
@@ -29,7 +30,7 @@ public class Mazo {
 	}
 
 	public void importarCartas(String mazoPath) {
-
+		
 		jsonInputFile = new File(mazoPath);
 
 		try {
@@ -53,27 +54,30 @@ public class Mazo {
 
 				cartaNueva.addAtributo(nombreAtributo, atributos.getInt(nombreAtributo));
 			}
-
-			// verificar si la carta cumple los requisitos
-			if (cartasList.size() != 0) {
-
-				if (cartaNueva.perteneceAlMazo(cartasList.get(0))) {
-
-					agregarCarta(cartaNueva);
-				}
-
-			} else {
-
-				agregarCarta(cartaNueva);
-			}
+			agregarCarta(cartaNueva);
 		}
-
 		reader.close();
+	}
+	
+	private boolean estaVacio() {
+		
+		if(cartasList.size() != 0) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 
 	public void agregarCarta(Carta carta) {
 
-		this.cartasList.add(carta);
+		if (!this.estaVacio() && carta.perteneceAlMazo(cartasList.get(PRIMERAPOS))) {
+			
+			this.cartasList.add(carta);
+			
+		}else if (this.estaVacio()) { 
+		
+			this.cartasList.add(carta);
+		}
 	}
 
 	public void setPocima(Pocima pocima, int indice) {
@@ -83,12 +87,18 @@ public class Mazo {
 
 	public Carta getPrimeraCarta() {
 
-		Carta carta = this.cartasList.get(0);
-		this.cartasList.remove(0);
-
+		Carta carta = this.cartasList.get(PRIMERAPOS);
+		
+		this.removerCarta(PRIMERAPOS);
 		return carta;
 	}
 
+	public void removerCarta(int index) {
+		
+		this.cartasList.remove(index);
+		
+	}
+	
 	public void mezclarMazo() {
 
 		Collections.shuffle(this.cartasList);
@@ -96,7 +106,7 @@ public class Mazo {
 
 	public int getCantidadAtributos() {
 
-		return this.cartasList.get(0).getAtributos().size();
+		return this.cartasList.get(PRIMERAPOS).getCantidadAtributos();
 	}
 
 	public ArrayList<Carta> getCartas() {
@@ -110,44 +120,43 @@ public class Mazo {
 		Mazo mazo1 = new Mazo(mazoPath);
 
 		EstrategiaAmbicioso ambicioso = new EstrategiaAmbicioso();
-		//EstrategiaObstinado obstinado = new EstrategiaObstinado();    //Se pueden descomentar y utilizar!
+		//EstrategiaObstinado obstinado = new EstrategiaObstinado();  
 		EstrategiaTimbero timbero = new EstrategiaTimbero();
-		//EstrategiaSonso sonso = new EstrategiaSonso();
 		
 		Jugador jugador1 = new Jugador("Luis", timbero);
 		Jugador jugador2 = new Jugador("Marcelo", ambicioso);
 		
-		PocimaPorcentaje pocimaF1 = new PocimaPorcentaje("Pócima Fortalecedora", 0.2);
-		PocimaPorcentaje pocimaF2 = new PocimaPorcentaje("Pócima Fortalecedora", 0.3);
+		PocimaFortalecedora pocimaF1 = new PocimaFortalecedora("Pócima Fortalecedora", 0.2);
+		PocimaFortalecedora pocimaF2 = new PocimaFortalecedora("Pócima Fortalecedora", 0.3);
 		
-		PocimaPorcentaje pocimaFPlus1 = new PocimaPorcentaje("Pócima Fortalecedora Plus", 0.5);
-		PocimaPorcentaje pocimaFPlus2 = new PocimaPorcentaje("Pócima Fortalecedora Plus", 0.6);
+		PocimaFortalecedora pocimaFPlus1 = new PocimaFortalecedora("Pócima Fortalecedora Plus", 0.5);
+		PocimaFortalecedora pocimaFPlus2 = new PocimaFortalecedora("Pócima Fortalecedora Plus", 0.6);
 		
-		PocimaPorcentaje pocimaR1 = new PocimaPorcentaje("Kriptonita", -0.25);
-		PocimaPorcentaje pocimaR2 = new PocimaPorcentaje("Kriptonita", -0.30);
+		PocimaFortalecedora pocimaR1 = new PocimaFortalecedora("Kriptonita", -0.25);
+		PocimaFortalecedora pocimaR2 = new PocimaFortalecedora("Kriptonita", -0.30);
 		
-		PocimaPorcentaje pocimaR3 = new PocimaPorcentaje("Reductor de plomo", -0.55);
-		PocimaPorcentaje pocimaR4 = new PocimaPorcentaje("Reductor de plomo", -0.60);
+		PocimaFortalecedora pocimaR3 = new PocimaFortalecedora("Reductor de plomo", -0.55);
+		PocimaFortalecedora pocimaR4 = new PocimaFortalecedora("Reductor de plomo", -0.60);
 		
 		PocimaValorFijo pocimaV1 = new PocimaValorFijo("Quiero vale 4", 4);
 		PocimaValorFijo pocimaV2 = new PocimaValorFijo("Número mágico", 25);
 		
-		PocimaPorcentaje pocimaIF1 = new PocimaPorcentaje("Pócima Selectiva Fuerza", "fuerza", 0.35);
-		PocimaPorcentaje pocimaIF2 = new PocimaPorcentaje("Pócima Selectiva Fuerza", "fuerza", 0.35);
+		PocimaSelectiva pocimaIF1 = new PocimaSelectiva("Pócima Selectiva Fuerza", "fuerza", 0.35);
+		PocimaSelectiva pocimaIF2 = new PocimaSelectiva("Pócima Selectiva Fuerza", "fuerza", 0.35);
 		
-		PocimaPorcentaje pocimaIP1 = new PocimaPorcentaje("Pócima Selectiva Peso", "peso", 0.43);
-		PocimaPorcentaje pocimaIP2 = new PocimaPorcentaje("Pócima Selectiva Peso", "peso", 0.43);
+		PocimaSelectiva pocimaIP1 = new PocimaSelectiva("Pócima Selectiva Peso", "peso", 0.43);
+		PocimaSelectiva pocimaIP2 = new PocimaSelectiva("Pócima Selectiva Peso", "peso", 0.43);
 		
 		PocimaValorFijo pocimaPC = new PocimaValorFijo("Pócima Valor Fijo", 15);
-		PocimaPorcentaje pocimaRC = new PocimaPorcentaje("Pócima Reductora", -0.15);
-		PocimaPorcentaje pocimaFC = new PocimaPorcentaje("Pócima Fortalecedora", 0.2);
+		PocimaFortalecedora pocimaRC = new PocimaFortalecedora("Pócima Reductora", -0.15);
+		PocimaFortalecedora pocimaFC = new PocimaFortalecedora("Pócima Fortalecedora", 0.2);
 		
 		PocimaValorFijo pocimaPC2 = new PocimaValorFijo("Pócima Valor Fijo", 10);
-		PocimaPorcentaje pocimaPI2 = new PocimaPorcentaje("Pócima Selectiva Velocidad", "velocidad", 0.5);
+		PocimaSelectiva pocimaPI2 = new PocimaSelectiva("Pócima Selectiva Velocidad", "velocidad", 0.5);
 		
 		PocimaCocktail pocimaC3 = new PocimaCocktail("Pócima cocktail");
 		PocimaValorFijo pocimaVF1 = new PocimaValorFijo("Pócima valor fijo", 14);
-		PocimaPorcentaje pocimaSV = new PocimaPorcentaje("Pócima Selectiva Velocidad", 0.4);
+		PocimaFortalecedora pocimaSV = new PocimaFortalecedora("Pócima Selectiva Velocidad", 0.4);
 		
 		pocimaC3.agregarPocima(pocimaSV);
 		pocimaC3.agregarPocima(pocimaVF1);
@@ -183,5 +192,4 @@ public class Mazo {
 		
 		juego1.jugar();
 	}
-
 }

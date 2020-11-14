@@ -1,17 +1,16 @@
 
 public class PocimaValorFijo extends Pocima{
 
-	private int valorFijo;
+	private double valorFijo;
 	
-	public PocimaValorFijo(String nombre, int valorFijo) {
+	public PocimaValorFijo(String nombre, double valorFijo) {
 		super(nombre);
 		this.valorFijo = valorFijo;
 	}
 
 	@Override
-	public Atributo aplicar(Atributo atr) {
+	public double aplicar(String atrNombre, double atrValor) {
 		
-		atr.setValor(valorFijo);		
-		return atr;
+		return valorFijo;
 	}
 }

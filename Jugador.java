@@ -1,7 +1,7 @@
 public class Jugador {
 
 	private String nombre;
-	protected Mazo cartas;
+	private Mazo cartas;
 	private Estrategia estrategia;
 	
 	public Jugador (String nombre, Estrategia estrategia) {
@@ -19,7 +19,7 @@ public class Jugador {
 		this.cartas.agregarCarta(carta);
 	}
 	
-	public Mazo getMazo(){
+	private Mazo getMazo(){
 		return this.cartas;
 	}
 	
@@ -36,7 +36,6 @@ public class Jugador {
 	}
 	
  	public String elegirAtributo(Carta carta) {
- 	
  		return this.estrategia.elegirAtributo(carta);
  	}
  	
@@ -48,9 +47,14 @@ public class Jugador {
 		this.nombre = nombre;
 	}
 	
+	public String getInformacionCartas() {
+		
+		return this.getNombre() + " tiene " + this.getCantidadCartas() + " cartas. ";
+	}
+	
 	@Override
 	public String toString() {
 		
-		return this.getNombre();	
+		return "Jugador " + this.getNombre() + "! ";	
 	}
 }

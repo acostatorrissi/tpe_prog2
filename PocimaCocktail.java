@@ -14,11 +14,11 @@ public class PocimaCocktail extends Pocima {
 	}
 
 	@Override
-	public Atributo aplicar(Atributo atr) {
-		
+	public double aplicar(String atrNombre, double atrValor) {
+				
 		for(Pocima pocima : this.pocimas) {
-			pocima.aplicar(atr);
+			atrValor = pocima.aplicar(atrNombre, atrValor);
 		}	
-		return atr;
+		return atrValor;
 	}	
 }

@@ -5,19 +5,14 @@ public class Juego {
 	
 	private int maxRondas;
 	private int rondaActual;
-	private int turno;
 	private String nombreAtributo;
 	private Jugador jugador1;
 	private Jugador jugador2;
-	private Jugador jugadorTurno;
-	private String ganadorRonda;
+	private Jugador ganadorRonda;
+	private Jugador ganadorAnterior;
 	private Carta cartaJ1;
 	private Carta cartaJ2;
 	private Carta cartaGanadora;
-	private Atributo atrJ1;
-	private Atributo atrJ2 ;
-	private Pocima pocimaJ1; 
-	private Pocima pocimaJ2;
 	private Mazo mazo;
 	private ArrayList<Pocima> pocimas;
 	
@@ -26,14 +21,9 @@ public class Juego {
 		this.jugador1 = jugador1;
 		this.jugador2 = jugador2;
 		this.rondaActual = 1;
-		this.turno = 1;
 		this.nombreAtributo = "";
-		this.jugadorTurno = null;
-		this.ganadorRonda = " empate! ";
-		this.atrJ1 = null;
-		this.atrJ2 = null;
-		this.pocimaJ1 = null;
-		this.pocimaJ2 = null;
+		this.ganadorRonda = jugador1;
+		this.ganadorAnterior = null;
 		this.cartaJ1 = null;
 		this.cartaJ2 = null;
 		this.mazo = mazo;	
@@ -54,18 +44,14 @@ public class Juego {
 		mazo.mezclarMazo();
 		
 		for (int i = 0 ; i < mazo.getCartas().size() ; i++) {		
-			if ( i % 2 == 0  || i == 0 ) {			
+			if ( i % 2 == 0  || i == 0 ) {	
 				jugador1.addCartas(mazo.getCartas().get(i));
 			}else {
 				jugador2.addCartas(mazo.getCartas().get(i));
 			}		
 		}
 	}
-	
-	private void resetGanadorRonda() {
-		this.ganadorRonda = " empate! ";
-	}
-	
+
 	private Jugador getGanador() {
 		
 		if (jugador1.getCantidadCartas() == 0 || jugador1.getCantidadCartas() < jugador2.getCantidadCartas()) {	
@@ -83,100 +69,74 @@ public class Juego {
 
 	private void imprimirRonda() {
 		
-		String imprimir = "---------Ronda " + rondaActual + "----------\n"+"El jugador " + jugadorTurno + " selecciona competir por el atributo "+ nombreAtributo + 
-				"\nLa carta de " + jugador1 + " es " + cartaJ1 + " con " + cartaJ1.getCopiaAtributo(nombreAtributo);
-		 
-		if(pocimaJ1 != null) {
-			imprimir = imprimir + ". Se aplicó " + pocimaJ1 + "! -> Nuevo Valor: " + atrJ1; 
+		Object p1 = null;
+		Object p2 = null;
+		
+		if ( cartaJ1.getPocima() != null) {
+			p1 = cartaJ1.getPocima();
+			p1 = p1.toString() + cartaJ1.getValorAtributoPorNombre(nombreAtributo);
+		}else {
+			p1 = (String) " ";
 		}
 		
-		imprimir = imprimir + "\nLa carta de " + jugador2 + " es " + cartaJ2 + " con " + cartaJ2.getCopiaAtributo(nombreAtributo);
-		
-		if(pocimaJ2 != null) {
-			imprimir = imprimir + ". Se aplicó " + pocimaJ2 + "! -> Nuevo Valor: " + atrJ2;  
+		if ( cartaJ2.getPocima() != null) {
+			p2 = cartaJ2.getPocima();
+			p2 = p2.toString() + cartaJ2.getValorAtributoPorNombre(nombreAtributo);
+		}else {
+			p2 = (String) " ";
 		}
+			
+		String imprimir = "---------Ronda " + rondaActual + "----------\n"+ 
+				ganadorAnterior + "Selecciona competir por el atributo "+ nombreAtributo + 
+				"\n" + jugador1 + cartaJ1 + cartaJ1.getValorPorNombre(nombreAtributo) +p1;
 		
-		imprimir = imprimir + "\nRonda finalizada. Ganador: " + ganadorRonda + ".\n" + jugador1 + " tiene ahora " + jugador1.getCantidadCartas() + " cartas y " +
-				jugador2 + " tiene " + jugador2.getCantidadCartas() + " cartas.";
+		imprimir += "\n" + jugador2 + cartaJ2 + cartaJ2.getValorPorNombre(nombreAtributo)+p2;
+	
+		imprimir += "\nRonda finalizada. Ganador: " + ganadorRonda + "\n" + jugador1.getInformacionCartas() + jugador2.getInformacionCartas();
 		
 		System.out.println(imprimir);
 	}
 	
-	private Carta getCartaGanadora(Carta c1, Carta c2, String nombreAtributo) {
-		
-		if(c1.getPocima() != null) {
-			atrJ1 = c1.getPocima().aplicar(atrJ1);
-		}
-		if(c2.getPocima() != null) {
-			atrJ2 = c2.getPocima().aplicar(atrJ2);
-		}
-		
-		if (atrJ1.compareTo(atrJ2) > 0) {
-			return c1;
-		}else if(atrJ1.compareTo(atrJ2) < 0) {
-			return c2;
-		}else {
-			return null;
-		}	
-	}
-	
 	private void imprimirGanador() {
-		System.out.println("Ganó " + getGanador());
+		System.out.println(getGanador() + "GANADOR!");
 	}
 	
 	public void jugar() {
 		
 		repartirPocimas();
 		repartir();
-		
-		//Se juega mientras no se supere el max de rondas y ambos jugadores tengan cartas en sus mazos
+	
 		while ( (rondaActual <= maxRondas) && ( (jugador1.getCantidadCartas() != 0) && (jugador2.getCantidadCartas() != 0)) ) {
-					
-			resetGanadorRonda();
-			pocimaJ1 = null;
-			pocimaJ2 = null;
-			
+
 			cartaJ1 = jugador1.getPrimeraCarta();
 			cartaJ2 = jugador2.getPrimeraCarta();
-						
-			if(turno ==1) {
-				jugadorTurno = jugador1;	
-			}else {
-				jugadorTurno = jugador2;
+			
+			if ( ganadorRonda ==  jugador1) {
+				nombreAtributo = jugador1.elegirAtributo(cartaJ1);
+			}else if ( ganadorRonda == jugador2) {
+				nombreAtributo = jugador2.elegirAtributo(cartaJ2);
 			}
-			
-			nombreAtributo = jugadorTurno.elegirAtributo(cartaJ1);
 		
-			atrJ1 = cartaJ1.getCopiaAtributo(nombreAtributo);
-			atrJ2 = cartaJ2.getCopiaAtributo(nombreAtributo);
+			cartaGanadora = cartaJ1.getCartaGanadora(cartaJ2, nombreAtributo);
+			ganadorAnterior = ganadorRonda;
 			
-			if(cartaJ1.getPocima() != null) {	
-				pocimaJ1 = cartaJ1.getPocima();
-			}			
-			if(cartaJ2.getPocima() != null) {
-				pocimaJ2 = cartaJ2.getPocima();
-			}
-			
-			cartaGanadora = getCartaGanadora(cartaJ1, cartaJ2, nombreAtributo);
-		
 			if (cartaGanadora == cartaJ1){  //comparamos con == porque la direccion de memoria va a ser la misma
 				
-				ganadorRonda = jugador1.getNombre();
 				jugador1.addCartas(cartaJ2);
-				jugador1.addCartas(cartaJ1); 
-				turno = 1;			
+				jugador1.addCartas(cartaJ1);
+				ganadorRonda = jugador1;
 				
 			}else if (cartaGanadora == cartaJ2) {	
 				
-				ganadorRonda = jugador2.getNombre();
 				jugador2.addCartas(cartaJ2);
 				jugador2.addCartas(cartaJ1);
-				turno = 2;
-				
+				ganadorRonda = jugador2;
+	
 			}else {
 				jugador1.addCartas(cartaJ1);
 				jugador2.addCartas(cartaJ2);
 			}	
+			
 			this.imprimirRonda();
 			rondaActual++;
 		}
